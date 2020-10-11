@@ -1,0 +1,27 @@
+Routes:
+
+	.) / 		=> root site, this help menu
+	.) /messages	=> message repository
+
+
+Methods:
+
+1) GET:
+
+	.) /messages		=> lists all messages
+	.) /messages/<id>   	=> show message <id>
+
+
+2) POST:
+
+	.) /messages		=> save the payload in messages
+
+
+3) PUT: 
+
+	.) /messages/<id>	=> modify existing message with payload
+
+4) DELETE:
+
+	.) /messages/<id>	=> delete message <id>
+

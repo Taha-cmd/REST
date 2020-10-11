@@ -8,9 +8,13 @@ namespace REST
 {
     class FileHandle
     {
-        public FileHandle() { }
+        public string Root { get; private set; }
+        public FileHandle() 
+        {
+            Root = Path.Join(Directory.GetCurrentDirectory(), "ressources");
+        }
 
-        static public string[] GetFiles(string path)
+        public string[] GetFiles(string path)
         {
             string[] files = Directory.GetFiles(path);
 
@@ -22,7 +26,7 @@ namespace REST
             return files;
         }
 
-        static public int ComputeNewFileName(string path)
+        public int ComputeNewFileName(string path)
         {
             string[] files = Directory.GetFiles(path);
             int[] ids = files.Select(el => Convert.ToInt32(Path.GetFileNameWithoutExtension(el))).ToArray();
@@ -30,14 +34,21 @@ namespace REST
             return ids.Max() + 1;
         }
 
-        static public string ComputePath(string path, string[] tokens)
+        public string ComputePath(string route)
         {
+            string[] tokens = route.Split('/');
+            string path = "";
+
             foreach (string token in tokens)
-            {
                 path = Path.Join(path, token);
-            }
+            
 
             return path;
+        } 
+
+        public string PathWithRoot(string path)
+        {
+            return Path.Join(Root, path);
         }
     }
 }
