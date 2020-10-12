@@ -37,8 +37,12 @@ namespace REST
                 request.Display();
 
                 RequestHandler handler = new RequestHandler();
-
                 HttpResponse response = handler.HandleRequest(request);
+
+                response.AddHeader("Content-Type", "text");
+                response.AddHeader("Server", "my shitty laptop");
+                response.AddHeader("Date", DateTime.Today.ToString());
+
                 response.Send(client.GetStream());
             }
             catch (Exception ex)

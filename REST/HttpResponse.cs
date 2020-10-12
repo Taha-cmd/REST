@@ -25,7 +25,10 @@ namespace REST
 
         public void AddHeader(string key, string value)
         {
-            Values.Add(key, value);
+            if (Values.ContainsKey(key))
+                Values[key] = value;
+            else
+                Values.Add(key, value);
         }
 
         public void AddPayload(string payload)
