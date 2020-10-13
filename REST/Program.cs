@@ -10,7 +10,7 @@ namespace REST
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             HttpServer server = new HttpServer(8080);
 

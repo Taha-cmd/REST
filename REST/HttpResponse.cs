@@ -6,15 +6,14 @@ using System.Text;
 
 namespace REST
 {
-    class HttpResponse
+    public class HttpResponse : HttpRequestResponseBase
     {
-        public Dictionary<string, string> Values { get; private set; }
-        private string payload = "";
-
+        
         public string Protocol { get; set; }
         public string Status { get; set; }
         public string StatusMessage { get; set; }
-        public HttpResponse(string status = "400", string message = "Bad Request", string protocol = "HTTP/1.0")
+        private string payload = "";
+        public HttpResponse(string status = "400", string message = "Bad Request", string protocol = "HTTP/1.1")
         {
             Protocol = protocol;
             Status = status;
@@ -34,6 +33,14 @@ namespace REST
         public void AddPayload(string payload)
         {
             this.payload += payload;
+        }
+
+        public override void Display(ConsoleColor color)
+        {
+            PrintInColor("Protocol", Protocol, color);
+            PrintInColor("Status", Status, color);
+            PrintInColor("Status Message", StatusMessage, color);
+            base.Display(color);
         }
 
         public void Send(NetworkStream client)

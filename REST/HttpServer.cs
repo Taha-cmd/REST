@@ -34,7 +34,7 @@ namespace REST
             try
             {
                 HttpRequest request = new HttpRequest(client.GetStream());
-                request.Display();
+                request.Display(ConsoleColor.Yellow);
 
                 RequestHandler handler = new RequestHandler();
                 HttpResponse response = handler.HandleRequest(request);
@@ -42,6 +42,8 @@ namespace REST
                 response.AddHeader("Content-Type", "text");
                 response.AddHeader("Server", "my shitty laptop");
                 response.AddHeader("Date", DateTime.Today.ToString());
+
+                response.Display(ConsoleColor.Green);
 
                 response.Send(client.GetStream());
             }

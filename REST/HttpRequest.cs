@@ -7,10 +7,10 @@ using System.Text;
 
 namespace REST
 {
-    class HttpRequest
+    class HttpRequest : HttpRequestResponseBase
     {
         private string request;
-        public Dictionary<string, string> Values { get; private set; }
+        
         public HttpRequest(NetworkStream clientStream)
         {
             StreamReader reader = new StreamReader(clientStream);
@@ -22,24 +22,6 @@ namespace REST
                
             Values = new Dictionary<string, string>();
             ParseRequest();
-        }
-
-        public void Display()
-        {
-            Console.Write('\n');
-
-            foreach (KeyValuePair<string, string> kvp in Values)
-                PrintInColor(kvp.Key, kvp.Value);
-
-            Console.Write('\n');
-        }
-
-        private void PrintInColor(string key, string value, ConsoleColor color = ConsoleColor.Green)
-        {
-            Console.Write(key + ": ");
-            Console.ForegroundColor = color;
-            Console.WriteLine(value);
-            Console.ForegroundColor = ConsoleColor.White;
         }
 
         private void ParseRequest()

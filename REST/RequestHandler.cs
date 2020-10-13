@@ -12,7 +12,7 @@ namespace REST
         public HttpResponse HandleRequest(HttpRequest request)
         {
 
-            switch (request.Values["Method"])
+            switch (request.Values["Method"].ToUpper())
             {
                 case "GET":     return HandleGetRequest(request);
                 case "POST":    return HandlePostRequest(request);
@@ -22,6 +22,7 @@ namespace REST
 
             return new HttpResponse("405", "Method Not Allowed");
         }
+
 
         private HttpResponse HandleGetRequest(HttpRequest request)
         {
@@ -67,6 +68,7 @@ namespace REST
             return response;
 
         }
+
         private HttpResponse HandlePostRequest(HttpRequest request)
         {
             HttpResponse response = new HttpResponse("200", "OK");
@@ -98,6 +100,8 @@ namespace REST
 
             return response;
         }
+
+
         private HttpResponse HandlePutRequest(HttpRequest request)
         {
             HttpResponse response = new HttpResponse("200", "OK");
@@ -126,6 +130,7 @@ namespace REST
 
             return response;
         }
+
 
         private HttpResponse HandleDeleteRequest(HttpRequest request)
         {
